@@ -1,6 +1,6 @@
 <template>
   <div>
-    Главная
+    Главная 123
   </div>
 </template>
 
