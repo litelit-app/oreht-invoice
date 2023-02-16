@@ -1,6 +1,6 @@
 <template>
   <div>
-    Главная 1234
+    Главная 12345
   </div>
 </template>
 
