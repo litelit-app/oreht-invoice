@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="d-flex flex-column mr-10">
-      <v-sheet class="inv-item-caption text-uppercase">{{ caption }}</v-sheet>
-      <v-sheet class="inv-item-value">{{ value }}</v-sheet>
+      <div class="inv-item-caption text-uppercase">{{ caption }}</div>
+      <div class="inv-item-value">{{ value }}</div>
     </div>
   </div>
 </template>
