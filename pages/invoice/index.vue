@@ -1,10 +1,11 @@
 <template>
   <div>
-    <section-header>СПИСОК НЕ ОБРАБОТАННЫХ ЗАЯВОК</section-header>
+    <other-header>СПИСОК НЕ ОБРАБОТАННЫХ ЗАЯВОК</other-header>
     <div
-      v-for="item in UInvoice"
+        v-if="isClient"
+        v-for="item in UInvoice"
     >
-      <invoice-item-list
+      <invoice-list-item
           :id="item.id"
           :date="item.date"
           :organization="item.organization"
@@ -13,17 +14,16 @@
           :addr="item.addr"
           :manager="item.manager"
           :tel="item.tel"
-      ></invoice-item-list>
+      ></invoice-list-item>
     </div>
   </div>
 </template>
 
 <script setup>
-import InvoiceItemList from "~/components/invoice/InvoiceItemList.vue";
-import SectionHeader from "~/components/other/SectionHeader.vue";
-import {useUnprocessedInvoice} from "~/store/UnprocessedInvoice";
+import {useInvoice} from "~/store/Invoice";
 
-const UInvoice = useUnprocessedInvoice().UnprocessedInvoice
+const UInvoice = useInvoice().UnprocessedInvoices
+const isClient = process.client
 
 </script>
 

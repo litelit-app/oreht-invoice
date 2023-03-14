@@ -6,6 +6,23 @@ import * as directives from 'vuetify/directives'
 
 export default defineNuxtPlugin(nuxtApp => {
     const vuetify = createVuetify({
+        theme: {
+            defaultTheme: 'myCustomTheme',
+            themes: {
+                myCustomTheme: {
+                    dark: false,
+                    colors: {
+                        surface: '#FFFFFF',
+                        primary: '#259238',
+                        secondary: '#1E6D74',
+                        error: '#A60C00',
+                        info: '#A64E00',
+                        success: '#00C322',
+                        warning: '#FF7800',
+                    }
+                }
+            }
+        },
         icons: {
             defaultSet: 'fa',
             aliases,

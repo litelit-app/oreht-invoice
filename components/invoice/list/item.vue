@@ -6,6 +6,7 @@
             v-bind="props"
             class="d-flex left-line-warning pa-2 mb-1"
             :class="[isHovering ? 'bgHover' : 'bgWhite', colorWarn]"
+            @click="onClickInvoiceItem(id)"
         >
           <div class="d-flex align-center w-100">
             <v-icon class="text-grey-lighten-1 mr-3" size="large" icon="fa-regular fa-file"></v-icon>
@@ -14,7 +15,7 @@
                   v-if="paramCol.p1 > 0"
                   :cols="paramCol.p1"
               >
-                <invoice-item-block
+                <invoice-list-block
                     caption="номер:"
                     :value="id"
                 />
@@ -23,7 +24,7 @@
                   v-if="paramCol.p2 > 0"
                   :cols="paramCol.p2"
               >
-                <invoice-item-time-passed
+                <invoice-list-time
                     caption="номер:"
                     :delta="deltaDate"
                 />
@@ -32,7 +33,7 @@
                   v-if="paramCol.p3 > 0"
                   :cols="paramCol.p3"
               >
-                <invoice-item-block
+                <invoice-list-block
                     caption="организация:"
                     :value="organization"
                 />
@@ -41,7 +42,7 @@
                   v-if="paramCol.p4 > 0"
                   :cols="paramCol.p4"
               >
-                <invoice-item-block
+                <invoice-list-block
                     caption="адрес:"
                     :value="addr"
                 />
@@ -50,7 +51,7 @@
                   v-if="paramCol.p5 > 0"
                   :cols="paramCol.p5"
               >
-                <invoice-item-block
+                <invoice-list-block
                     caption="менеджер:"
                     :value="manager"
                 />
@@ -64,9 +65,6 @@
 </template>
 
 <script setup>
-import InvoiceItemBlock from "~/components/invoice/InvoiceItemBlock.vue";
-import InvoiceItemTimePassed from "~/components/invoice/invoiceItemTimePassed.vue";
-import {ref, computed} from "vue";
 import {useDisplay} from 'vuetify'
 
 const props = defineProps({
@@ -79,7 +77,6 @@ const props = defineProps({
   tel: String,
   addr: String,
 })
-
 const {name} = useDisplay()
 
 const paramCol = computed(() => {
@@ -91,11 +88,11 @@ const paramCol = computed(() => {
     case 'md':
       return {p1: '1', p2: '1', p3: '5', p4: '5', p5: '0'}
     case 'lg':
-      return {p1: '1', p2: '1', p3: '3', p4: '4', p5: '2'}
+      return {p1: '1', p2: '1', p3: '4', p4: '4', p5: '2'}
     case 'xl':
-      return {p1: '1', p2: '1', p3: '3', p4: '4', p5: '2'}
+      return {p1: '1', p2: '1', p3: '4', p4: '4', p5: '2'}
     case 'xxl':
-      return {p1: '1', p2: '1', p3: '3', p4: '4', p5: '2'}
+      return {p1: '1', p2: '1', p3: '4', p4: '4', p5: '2'}
   }
   return undefined
 })
@@ -111,6 +108,10 @@ deltaDate.value = Math.round((nowDate - valueDate) / 60 / 1000)
 if (deltaDate.value < 10) colorWarn.value = 'left-line-little'
 else if (deltaDate.value >= 10 && deltaDate.value < 30) colorWarn.value = 'left-line-middle '
 else colorWarn.value = 'left-line-long'
+
+function onClickInvoiceItem(invoice) {
+  navigateTo(`/invoice/${invoice}`)
+}
 
 </script>
 
