@@ -43,7 +43,7 @@ else colorWarn.value = 'v-long'
 }
 
 .v-little {
-  color: #259238;
+  color: #005321;
 }
 
 .v-middle {
@@ -51,7 +51,7 @@ else colorWarn.value = 'v-long'
 }
 
 .v-long {
-  color: #BF3A30;
+  color: #d10000;
 }
 
 </style>

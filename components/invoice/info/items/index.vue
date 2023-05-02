@@ -1,78 +1,98 @@
 <template>
   <div>
-    <div class="d-flex flex-row flex-wrap">
-      <div class="mr-6">
-        <v-icon
-            v-if="status === 'process'"
-            color="#51a144A0"
-            icon="fa-solid fa-circle-arrow-right"
-            size="100"
-        ></v-icon>
-        <v-icon
-            v-else-if="status === 'email'"
-            color="#51a144A0"
-            icon="fa fa-square-envelope"
-            size="100"
-        ></v-icon>
-        <v-icon
-            v-else
-            color="#51a144A0"
-            icon="fa fa-circle-check"
-            size="100"
-        ></v-icon>
-      </div>
-      <div class="mr-10">
-        <invoice-info-block
-            icon="fa-regular fa-file-lines"
-            caption="Номер"
-            :value="id"
-        />
-        <invoice-info-block
-            icon="fas fa-bars-staggered"
-            caption="ИНН"
-            :value="inn"
-        />
-      </div>
-      <div class="mr-10">
-        <invoice-info-block
-            icon="fa-regular fa-building"
-            caption="Организация"
-            :value="name"
-        />
-        <invoice-info-block
-            icon="fa fa-location-dot"
-            caption="Адрес"
-            :value="addr"
-        />
-      </div>
-      <div>
-        <invoice-info-block
-            icon="fa fa-phone"
-            caption="Телефон"
-            :value="tel"
-        />
-        <invoice-info-block
-            icon="fa fa-user-tie"
-            caption="Менеджер"
-            :value="manager"
-        />
-      </div>
-    </div>
+    <v-hover
+        v-slot="{ isHovering, props }"
+        v-for="item in items"
+        :key="item.code"
+    >
+      <v-sheet
+          v-bind="props"
+          border
+          class="pt-3 pb-2"
+          :class="[isHovering ? 'onHover' : 'offHover']"
+      >
+        <v-row>
+          <v-col cols="5">
+            <invoice-info-items-bname
+                :code="item.code"
+                :name="item.name"
+                :img="item.pic"
+            />
+          </v-col>
+          <v-col cols="1">
+            <div class="d-flex h-100 align-center">
+              <invoice-info-items-btext
+                  caption="Склад"
+                  :value="item.storage"
+              />
+            </div>
+          </v-col>
+          <v-col cols="1">
+            <div class="d-flex h-100 align-center">
+              <invoice-info-items-btext
+                  caption="Бренд"
+                  :value="item.brand === '' ? '----------' : item.brand"
+              />
+            </div>
+          </v-col>
+          <v-col cols="1">
+            <div class="d-flex h-100 align-center justify-center">
+              <invoice-info-items-btext
+                  caption="Единица"
+                  :value="item.up_ed"
+              />
+            </div>
+          </v-col>
+            <v-col cols="1">
+                <div class="d-flex h-100 align-center justify-center">
+                    <invoice-info-items-btext
+                        caption="В упаковке"
+                        :value="Number(item.up_kol).toFixed(0)"
+                    />
+                </div>
+            </v-col>
+            <v-col cols="1">
+                <div class="d-flex h-100 align-center justify-center">
+                    <invoice-info-items-btext
+                        caption="Цена"
+                        :value="item.price"
+                    />
+                </div>
+            </v-col>
+          <v-col cols="1">
+            <div class="d-flex justify-center h-100 align-center">
+              <invoice-info-items-btext
+                  caption="В заявке"
+                  :value="item.quantity"
+              />
+            </div>
+          </v-col>
+          <v-col cols="1">
+            <div class="d-flex justify-center h-100 align-center">
+              <invoice-info-items-btext
+                  caption="По факту"
+                  :value="0"
+              />
+            </div>
+          </v-col>
+        </v-row>
+      </v-sheet>
+    </v-hover>
   </div>
 </template>
 
 <script setup>
 const props = defineProps({
-  status: String,
-  id: String,
-  inn: String,
-  name: String,
-  addr: String,
-  tel: String,
-  manager: String
+    items: Array
 })
-
 </script>
 
 <style scoped>
+.onHover {
+  cursor: pointer;
+}
+
+.offHover {
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="d-inline-flex">
       <v-btn
           color="primary"
           class="mr-5"
@@ -11,6 +11,7 @@
         Обработать
       </v-btn>
       <v-btn
+          class="mr-5"
           color="primary"
           disabled
       >
