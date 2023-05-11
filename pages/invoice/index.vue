@@ -6,12 +6,12 @@
             elevation="1"
         >
             <invoice-list-update
-                :needupdate="InvoiceStore.needUpdateInvoice"
+                :needupdate="CountNeedToUpdate.result"
                 @click-update="onUpdateClick"
             />
         </v-sheet>
         <div
-            v-for="item in UInvoice"
+            v-for="item in ListInvoices.invoices"
         >
             <invoice-list-item
                 :id="item.id"
@@ -29,17 +29,47 @@
 </template>
 
 <script setup>
-import {useInvoice} from "~/store/Invoice"
-const InvoiceStore = useInvoice()
-
-
-const UInvoice = InvoiceStore.Invoices
-InvoiceStore.UpdateListInvoices()
+const LastDateUpdateListInvoices = ref('')
 
 function onUpdateClick() {
-    InvoiceStore.needUpdateInvoice = 6
-    InvoiceStore.UpdateListInvoices()
+    LastDateUpdateListInvoices.value = useDateNow()
+    refreshNuxtData('UpdateListInvoices')
+    refreshNuxtData('CountNeedToUpdate')
 }
+
+LastDateUpdateListInvoices.value = useDateNow()
+console.log(LastDateUpdateListInvoices.value)
+
+const {
+    data: ListInvoices,
+    pending: pendingListInvoices
+} = await useAsyncData('UpdateListInvoices', () => $fetch(`/api/invoice/list`))
+
+watch(ListInvoices, (newListInvoices) => {
+    console.log('ListUpdate: ', newListInvoices)
+})
+
+const {
+    data: CountNeedToUpdate
+} = await useAsyncData('CountNeedToUpdate', () => $fetch(`/api/invoice/last`, {
+    method: "POST",
+    body: {date: LastDateUpdateListInvoices.value}
+}))
+
+let IntervalCountNeedToUpdate
+onMounted(() => {
+    IntervalCountNeedToUpdate = setInterval(() => {
+        refreshNuxtData('CountNeedToUpdate')
+    }, 30000)
+})
+
+onUnmounted(() => {
+    clearInterval(IntervalCountNeedToUpdate)
+})
+
+watch(CountNeedToUpdate, (newCountNeedToUpdate) => {
+    console.log('Update count - ', newCountNeedToUpdate)
+})
 
 </script>
 

@@ -4,9 +4,7 @@ export default defineNuxtConfig({
     build: {
         transpile: ['vuetify'],
     },
-    modules:     [
-        '@pinia/nuxt',
-    ],
+    modules: [],
     experimental: {
         writeEarlyHints: false,
     },

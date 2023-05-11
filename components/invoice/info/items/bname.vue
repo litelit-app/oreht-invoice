@@ -32,10 +32,7 @@ const props = defineProps({
     name: String,
     img: String
 })
-
-import {useGlobal} from "~/store/global"
-
-const ImageUrl = useGlobal().ImageURL
+const ImageUrl = useImageURL()
 
 </script>
 

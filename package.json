@@ -9,16 +9,14 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
-    "@types/node": "^18.16.3",
+    "@types/node": "^20.1.2",
     "nuxt": "^3.4.3",
     "sass": "^1.62.1",
-    "vuetify": "^3.2.1"
+    "vuetify": "^3.2.3"
   },
   "dependencies": {
-    "@pinia/nuxt": "^0.4.9",
     "bcryptjs": "^2.4.3",
-    "mysql2": "^3.2.4",
-    "pinia": "^2.0.35",
+    "mysql2": "^3.3.0",
     "vue": "^3.2.47"
   }
 }

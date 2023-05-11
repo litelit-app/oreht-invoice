@@ -13,10 +13,10 @@ export default defineEventHandler(async () => {
                 WHERE im.status=1 AND im.manager=1
                 ORDER BY im.date_create DESC 
                 LIMIT 30`
-        const [rows] = await connection.query(sqlQuery)
+        const [invoices] = await connection.query(sqlQuery)
 
         await connection.end()
-        return { rows }
+        return { invoices }
     } catch (e) {
         await connection.end()
         return { error: e.message }

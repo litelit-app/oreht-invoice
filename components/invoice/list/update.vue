@@ -1,9 +1,21 @@
 <template>
     <div>
-        <v-badge
-            :content="needupdate"
-            color="error"
-        >
+        <div v-if="needupdate > 0">
+            <v-badge
+                :content="needupdate"
+                color="error"
+            >
+                <v-btn
+                    color="primary"
+                    variant="outlined"
+                    prepend-icon="fa fa-arrows-rotate"
+                    @click="onUpdateClick"
+                >
+                    Обновить заявки
+                </v-btn>
+            </v-badge>
+        </div>
+        <div v-else>
             <v-btn
                 color="primary"
                 variant="outlined"
@@ -12,7 +24,7 @@
             >
                 Обновить заявки
             </v-btn>
-        </v-badge>
+        </div>
     </div>
 </template>
 
