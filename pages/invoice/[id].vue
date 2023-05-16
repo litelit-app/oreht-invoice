@@ -1,10 +1,6 @@
 <template>
     <div>
         <div
-            class="text-h5 text-red-accent-4 ma-5"
-        >{{ testValue }}
-        </div>
-        <div
             class="d-flex align-center">
             <v-btn
                 size="small"
@@ -95,8 +91,6 @@ useHead({
 
 const router = useRouter()
 const route = useRoute()
-
-const testValue = ref(1)
 const idInvoice = route.params.id
 
 const errorInvoiceMain = ref(0)
@@ -105,13 +99,11 @@ const errorInvoiceItems = ref(0)
 const {
     data: InvoiceMain,
     pending: loadingMain,
-    error: InvoiceMainError
-} = await useLazyAsyncData('InvoiceMain', () => $fetch(`/api/invoice/${idInvoice}/main`))
+} = await useAsyncData('InvoiceMain', () => $fetch(`/api/invoice/${idInvoice}/main`))
 
 const {
     data: InvoiceItems,
     pending: loadingItems,
-    error: InvoiceItemsError
 } = await useLazyAsyncData('InvoiceItems', () => $fetch(`/api/invoice/${idInvoice}/items`))
 
 function onClickTest() {
@@ -124,20 +116,7 @@ watch(InvoiceMain, (newInvoiceMain) => {
 })
 
 watch(InvoiceItems, (newInvoiceItems) => {
-})
-
-let intervalVal
-onMounted(() => {
-    console.log("start timer")
-    intervalVal = setInterval(() => {
-        refreshNuxtData('InvoiceItems')
-        testValue.value++
-    }, 5000)
-})
-
-onUnmounted(() => {
-    console.log("stop timer")
-    clearInterval(intervalVal)
+    if (typeof newInvoiceMain === 'string') errorInvoiceItems.value = 1
 })
 
 </script>

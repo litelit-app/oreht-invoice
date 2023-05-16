@@ -23,7 +23,7 @@ export default defineNuxtConfig({
     routeRules: {
         "/": {
             redirect: {
-                to: "/main",
+                to: "/invoice",
                 statusCode: 301,
             },
         },

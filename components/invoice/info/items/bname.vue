@@ -1,24 +1,20 @@
 <template>
     <div>
-        <div class="d-flex mb-1">
+        <div class="d-flex align-center">
             <div
-                class="d-flex justify-center align-center pl-4 pr-1 text-grey-lighten-1"
+                class="d-flex align-center pl-4 pr-1 text-grey-lighten-1"
             >
-                <v-icon
-                    size="20"
-                >
-                    fa-regular fa-circle
-                </v-icon>
+                <v-icon size="20">fa-regular fa-circle</v-icon>
             </div>
             <div
-                class="d-flex justify-center align-center pl-2 pr-2"
+                class="d-flex align-center pl-2 pr-2"
             >
                 <img
                     style="width: 50px;"
-                    :src="ImageUrl + img"
+                    :src="ImageResult"
                 />
             </div>
-            <div class="d-flex flex-column justify-center">
+            <div class="d-flex flex-column">
                 <div class="code">РСВ-{{ code }}</div>
                 <div class="name">{{ name }}</div>
             </div>
@@ -33,6 +29,10 @@ const props = defineProps({
     img: String
 })
 const ImageUrl = useImageURL()
+const ImageResult = ref('')
+
+if (props.img !== '') ImageResult.value = ImageUrl.value + props.img
+    else ImageResult.value = '/no-image.png'
 
 </script>
 

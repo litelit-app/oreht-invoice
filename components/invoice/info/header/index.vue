@@ -1,7 +1,10 @@
 <template>
     <div>
         <div class="d-flex flex-row flex-wrap">
-            <div class="mr-6">
+            <div
+                v-if="isVisibleIcon"
+                class="mr-6"
+            >
                 <v-icon
                     v-if="status === 'process'"
                     color="#00532180"
@@ -62,6 +65,8 @@
 </template>
 
 <script setup>
+import {useDisplay} from "vuetify"
+
 const props = defineProps({
     status: String,
     id: String,
@@ -71,6 +76,19 @@ const props = defineProps({
     email: String,
     tel: String,
     manager: String
+})
+
+const { name: display } = useDisplay()
+const isVisibleIcon = computed(() => {
+    switch (display.value) {
+        case 'xs': return false
+        case 'sm': return false
+        case 'md': return false
+        case 'lg': return true
+        case 'xl': return true
+        case 'xxl': return true
+    }
+    return undefined
 })
 
 </script>
