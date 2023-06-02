@@ -6,21 +6,21 @@
                 class="mr-6"
             >
                 <v-icon
-                    v-if="status === 'process'"
-                    color="#00532180"
+                    v-if="status === 1"
+                    color="#9fbfac"
                     icon="fa-solid fa-circle-arrow-right"
                     size="100"
                 ></v-icon>
                 <v-icon
-                    v-else-if="status === 'email'"
-                    color="#00532180"
+                    v-else-if="status === 2"
+                    color="#df8e46"
                     icon="fa fa-square-envelope"
                     size="100"
                 ></v-icon>
                 <v-icon
                     v-else
-                    color="#00532180"
-                    icon="fa fa-circle-check"
+                    color="#246E39"
+                    icon="fa-regular fa-circle-check"
                     size="100"
                 ></v-icon>
             </div>
@@ -68,7 +68,7 @@
 import {useDisplay} from "vuetify"
 
 const props = defineProps({
-    status: String,
+    status: Number,
     id: String,
     inn: String,
     name: String,
@@ -77,6 +77,8 @@ const props = defineProps({
     tel: String,
     manager: String
 })
+
+console.log(props.status)
 
 const { name: display } = useDisplay()
 const isVisibleIcon = computed(() => {

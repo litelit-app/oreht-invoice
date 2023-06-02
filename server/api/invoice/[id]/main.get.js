@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
 
     try {
         const sqlQuery1 =
-            `SELECT im.id_old,im.inn,iu.organization name,im.tel,im.email,mt.name manager,iu.address addr,im.date_create date,im.platform 
+            `SELECT im.id_old,im.status,im.inn,iu.organization name,im.tel,im.email,mt.name manager,iu.address addr,im.date_create date,im.platform 
                 FROM invoice_main im
                 LEFT JOIN invoice_managers mt ON mt.id=im.manager 
                 LEFT JOIN invoice_users iu ON iu.inn=im.inn

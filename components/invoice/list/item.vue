@@ -74,7 +74,7 @@ import {useDisplay} from 'vuetify'
 const props = defineProps({
     id: String,
     id_old: String,
-    date: String,
+    date: Number,
     organization: String,
     inn: String,
     email: String,
@@ -102,14 +102,9 @@ const paramCol = computed(() => {
     return undefined
 })
 
-const deltaDate = ref()
+const deltaDate = ref(Math.round((props.date) / 60 / 1000))
 const colorWarn = ref()
 const colorHover = ref()
-
-const valueDate = new Date(props.date.replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1'))
-const nowDate = Date.now()
-
-deltaDate.value = Math.round((nowDate - valueDate) / 60 / 1000)
 
 if (deltaDate.value < 10) {
     colorWarn.value = 'left-line-little'

@@ -9,6 +9,17 @@ export default defineNuxtConfig({
         writeEarlyHints: false,
     },
     runtimeConfig: {
+        smtp: {
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASSWORD
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        },
         mysql: {
             host: process.env.MYSQL_HOST,
             user: process.env.MYSQL_USER,

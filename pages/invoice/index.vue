@@ -10,14 +10,38 @@
                 @click-update="onUpdateClick"
             />
         </v-sheet>
+
+        <div
+            v-if="!pendingListInvoices && ListInvoices.invoices.length === 0"
+        >
+            <v-alert
+                v-if="CountNeedToUpdate.result === 0"
+                class="ma-5"
+                type="success"
+                border="start"
+                variant="tonal"
+                title="Все заявки обработаны"
+            ></v-alert>
+
+            <v-alert
+                v-if="CountNeedToUpdate.result > 0"
+                class="ma-5"
+                type="warning"
+                border="start"
+                variant="tonal"
+                title="Есть новые заявки, необходимо обновить список."
+            ></v-alert>
+        </div>
+
         <div
             v-for="item in ListInvoices.invoices"
+            :key="item.id"
         >
             <invoice-list-item
                 :id="item.id"
-                :id_old="item.id_old"
-                :date="item.date"
-                :organization="item.organization"
+                :id_old="String(item.id_old)"
+                :date="Date.now() - (new Date(item.date.replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$3-$2-$1')))"
+                :organization="String(item.organization)"
                 :email="item.email"
                 :inn="item.inn"
                 :addr="item.addr"
@@ -32,13 +56,13 @@
 const LastDateUpdateListInvoices = ref('')
 
 function onUpdateClick() {
+    ListInvoices.value.invoices.length = 0
     LastDateUpdateListInvoices.value = useDateNow()
-    refreshNuxtData('UpdateListInvoices')
     refreshNuxtData('CountNeedToUpdate')
+    refreshNuxtData('UpdateListInvoices')
 }
 
 LastDateUpdateListInvoices.value = useDateNow()
-console.log(LastDateUpdateListInvoices.value)
 
 const {
     data: ListInvoices,

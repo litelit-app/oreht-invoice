@@ -2,7 +2,7 @@
     <div>
         <div v-if="needupdate > 0">
             <v-badge
-                :content="needupdate"
+                :content="'+' + needupdate"
                 color="error"
             >
                 <v-btn

@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
         const sqlQuery1 =
             `SELECT COUNT(id) 
                 FROM invoice_main im
-                WHERE im.date_create>?`
+                WHERE im.date_create>? AND im.manager=1`
 
         const sqlParam1 = [date]
         const [result] = await connection.execute(sqlQuery1, sqlParam1)

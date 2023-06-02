@@ -10,8 +10,8 @@ export default defineEventHandler(async () => {
                 FROM invoice_main im
                 LEFT JOIN invoice_managers mt ON mt.id=im.manager 
                 LEFT JOIN invoice_users iu ON iu.inn=im.inn
-                WHERE im.status=1 AND im.manager=1
-                ORDER BY im.date_create DESC 
+                WHERE im.status<=2 AND im.manager=1
+                ORDER BY im.date_create ASC 
                 LIMIT 30`
         const [invoices] = await connection.query(sqlQuery)
 

@@ -16,9 +16,9 @@ export default defineNuxtPlugin(nuxtApp => {
                         primary: '#005321',
                         secondary: '#1E6D74',
                         error: '#d10000',
-                        info: '#A64E00',
-                        success: '#00C322',
-                        warning: '#FF7800',
+                        info: '#af6725',
+                        success: '#527257',
+                        warning: '#af6725',
                     }
                 }
             }
