@@ -7,7 +7,7 @@
             >
                 <v-btn
                     color="primary"
-                    variant="outlined"
+                    variant="elevated"
                     prepend-icon="fa fa-arrows-rotate"
                     @click="onUpdateClick"
                 >
@@ -18,7 +18,7 @@
         <div v-else>
             <v-btn
                 color="primary"
-                variant="outlined"
+                variant="elevated"
                 prepend-icon="fa fa-arrows-rotate"
                 @click="onUpdateClick"
             >

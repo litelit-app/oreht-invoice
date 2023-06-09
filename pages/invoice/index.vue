@@ -2,7 +2,7 @@
     <div>
         <other-header>СПИСОК НЕ ОБРАБОТАННЫХ ЗАЯВОК</other-header>
         <v-sheet
-            class="mb-5 pa-4"
+            class="mb-5 pa-4 border"
             elevation="1"
         >
             <invoice-list-update
@@ -16,7 +16,7 @@
         >
             <v-alert
                 v-if="CountNeedToUpdate.result === 0"
-                class="ma-5"
+                class="mt-5"
                 type="success"
                 border="start"
                 variant="tonal"
@@ -25,7 +25,7 @@
 
             <v-alert
                 v-if="CountNeedToUpdate.result > 0"
-                class="ma-5"
+                class="mt-5"
                 type="warning"
                 border="start"
                 variant="tonal"
